@@ -8,21 +8,23 @@ namespace Data.Models
     public class Session
     {
         public int SessionId { get; set; }
-        [Required]
-        [Column(TypeName = "LONGTEXT(30)")]
-        public string SessionName { get; set; }
+        public string? SessionName { get; set; }
         public SessionStatus Status { get; set; }
         public DateTime DateTimeCreated { get; set; }
         public DateTime? DateTimeStarted { get; set; }
         public DateTime? DateTimeEnded { get; set; }
         public int CreatePlayerId { get; set; }
-        public int WonPlayerId { get; set; }
-        public enum SessionStatus
-        {
-            Waiting,
-            Active,
-            Ended
-        }
-        public List<Player>? Players { get; set; }
+        public Player CreateSessionPlayer { get; set; }
+        public int? WonPlayerId { get; set; }
+        public Player? WonPlayer { get; set; }
+        public ICollection<Player> Players { get; set; } = new HashSet<Player>();
+        public ICollection<AnswerHistory> AnswerHistories { get; set; } = new HashSet<AnswerHistory>();
+    }
+
+    public enum SessionStatus
+    {
+        Waiting,
+        Active,
+        Ended
     }
 }
