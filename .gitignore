@@ -1,0 +1,42 @@
+# Временные файлы, сгенерированные компилятором
+ASPMVC/bin/
+ASPMVC/obj/
+
+# Visual Studio
+.vs/
+.vscode/
+
+# Папки и файлы NuGet
+*.nupkg
+packages/
+project.lock.json
+
+# Лог-файлы
+*.log
+
+# Конфигурация среды разработки
+ASPMVC/appsettings.Development.json
+ASPMVC/launchSettings.json
+
+# Файлы публикации
+ASPMVC/publish/
+ASPMVC/wwwroot/
+
+# Системные файлы
+ASPMVC/Thumbs.db
+ASPMVC/*.DS_Store
+
+# Кэш инструментов
+ASPMVC/.idea/
+ASPMVC/*.suo
+ASPMVC/*.user
+ASPMVC/*.userosscache
+ASPMVC/*.sln.docstates
+
+# Результаты тестов
+ASPMVC/TestResults/
+ASPMVC/*.trx
+ASPMVC/*.coverage
+
+# Файлы Docker
+ASPMVC/docker-compose.override.yml
