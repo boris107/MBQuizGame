@@ -1,6 +1,6 @@
 # Временные файлы, сгенерированные компилятором
-bin/
-obj/
+ASPMVC/bin/
+ASPMVC/obj/
 
 # Visual Studio
 .vs/
@@ -15,28 +15,28 @@ project.lock.json
 *.log
 
 # Конфигурация среды разработки
-appsettings.Development.json
-launchSettings.json
+ASPMVC/appsettings.Development.json
+ASPMVC/launchSettings.json
 
 # Файлы публикации
-publish/
-wwwroot/
+ASPMVC/publish/
+ASPMVC/wwwroot/
 
 # Системные файлы
-Thumbs.db
-*.DS_Store
+ASPMVC/Thumbs.db
+ASPMVC/*.DS_Store
 
 # Кэш инструментов
-.idea/
-*.suo
-*.user
-*.userosscache
-*.sln.docstates
+ASPMVC/.idea/
+ASPMVC/*.suo
+ASPMVC/*.user
+ASPMVC/*.userosscache
+ASPMVC/*.sln.docstates
 
 # Результаты тестов
-TestResults/
-*.trx
-*.coverage
+ASPMVC/TestResults/
+ASPMVC/*.trx
+ASPMVC/*.coverage
 
 # Файлы Docker
-docker-compose.override.yml
+ASPMVC/docker-compose.override.yml
