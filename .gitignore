@@ -1,18 +1,18 @@
 # Временные файлы, сгенерированные компилятором
-ASPMVC/bin/
-ASPMVC/obj/
+**/bin/
+**/obj/
 
 # Visual Studio
 .vs/
 .vscode/
 
 # Папки и файлы NuGet
-*.nupkg
-packages/
-project.lock.json
+**/*.nupkg
+**/packages/
+**/project.lock.json
 
 # Лог-файлы
-*.log
+**/*.log
 
 # Конфигурация среды разработки
 ASPMVC/appsettings.Development.json
