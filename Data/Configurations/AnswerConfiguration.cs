@@ -14,7 +14,7 @@ namespace Data.Configurations
            .HasColumnType($"VARCHAR({MaxLengthAnswerText})");
 
             builder.HasOne(a => a.CurrentQuestion)
-                   .WithMany()  // Один вопрос может иметь много ответов
+                   .WithMany(q => q.Answers)  // Один вопрос может иметь много ответов
                    .HasForeignKey(a => a.QuestionId)
                    .IsRequired()
                    .OnDelete(DeleteBehavior.Cascade);

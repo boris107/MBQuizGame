@@ -108,7 +108,8 @@ namespace Data.Migrations
 
                     b.HasKey("PlayerId");
 
-                    b.HasIndex("SessionId");
+                    b.HasIndex("SessionId")
+                        .IsUnique();
 
                     b.HasIndex("UserId");
 
@@ -126,7 +127,7 @@ namespace Data.Migrations
                     b.Property<int?>("CorrectAnswerId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("PlayerId")
+                    b.Property<int>("CreateQuestionPlayerId")
                         .HasColumnType("int");
 
                     b.Property<string>("QuestionName")
@@ -138,10 +139,6 @@ namespace Data.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("QuestionId");
-
-                    b.HasIndex("CorrectAnswerId");
-
-                    b.HasIndex("PlayerId");
 
                     b.HasIndex("SessionId");
 
@@ -156,7 +153,7 @@ namespace Data.Migrations
 
                     MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("SessionId"));
 
-                    b.Property<int>("CreatePlayerId")
+                    b.Property<int?>("CreatePlayerId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("DateTimeCreated")
@@ -182,14 +179,6 @@ namespace Data.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("SessionId");
-
-                    b.HasIndex("CreatePlayerId")
-                        .IsUnique();
-
-                    b.HasIndex("WonPlayerId")
-                        .IsUnique();
-
-                    b.HasIndex("CreatePlayerId", "WonPlayerId");
 
                     b.ToTable("Sessions");
                 });
@@ -221,7 +210,7 @@ namespace Data.Migrations
             modelBuilder.Entity("Data.Models.Answer", b =>
                 {
                     b.HasOne("Data.Models.Question", "CurrentQuestion")
-                        .WithMany()
+                        .WithMany("Answers")
                         .HasForeignKey("QuestionId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -267,8 +256,8 @@ namespace Data.Migrations
             modelBuilder.Entity("Data.Models.Player", b =>
                 {
                     b.HasOne("Data.Models.Session", "GameSession")
-                        .WithMany("Players")
-                        .HasForeignKey("SessionId")
+                        .WithOne("CreateSessionPlayer")
+                        .HasForeignKey("Data.Models.Player", "SessionId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -285,50 +274,25 @@ namespace Data.Migrations
 
             modelBuilder.Entity("Data.Models.Question", b =>
                 {
-                    b.HasOne("Data.Models.Answer", "CorrectAnswer")
-                        .WithMany()
-                        .HasForeignKey("CorrectAnswerId");
-
-                    b.HasOne("Data.Models.Player", "AskedQuestionPlayer")
-                        .WithMany()
-                        .HasForeignKey("PlayerId");
-
                     b.HasOne("Data.Models.Session", "GameSession")
                         .WithMany()
                         .HasForeignKey("SessionId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("AskedQuestionPlayer");
-
-                    b.Navigation("CorrectAnswer");
-
                     b.Navigation("GameSession");
                 });
 
-            modelBuilder.Entity("Data.Models.Session", b =>
+            modelBuilder.Entity("Data.Models.Question", b =>
                 {
-                    b.HasOne("Data.Models.Player", "CreateSessionPlayer")
-                        .WithOne()
-                        .HasForeignKey("Data.Models.Session", "CreatePlayerId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.HasOne("Data.Models.Player", "WonPlayer")
-                        .WithOne()
-                        .HasForeignKey("Data.Models.Session", "WonPlayerId")
-                        .OnDelete(DeleteBehavior.SetNull);
-
-                    b.Navigation("CreateSessionPlayer");
-
-                    b.Navigation("WonPlayer");
+                    b.Navigation("Answers");
                 });
 
             modelBuilder.Entity("Data.Models.Session", b =>
                 {
                     b.Navigation("AnswerHistories");
 
-                    b.Navigation("Players");
+                    b.Navigation("CreateSessionPlayer");
                 });
 #pragma warning restore 612, 618
         }

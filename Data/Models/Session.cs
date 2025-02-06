@@ -13,11 +13,9 @@ namespace Data.Models
         public DateTime DateTimeCreated { get; set; }
         public DateTime? DateTimeStarted { get; set; }
         public DateTime? DateTimeEnded { get; set; }
-        public int CreatePlayerId { get; set; }
-        public Player CreateSessionPlayer { get; set; }
-        public int? WonPlayerId { get; set; }
-        public Player? WonPlayer { get; set; }
-        public ICollection<Player> Players { get; set; } = new HashSet<Player>();
+        public int? CreatePlayerId { get; set; }
+        public Player? CreateSessionPlayer { get; set; }
+        public int? WonPlayerId { get; set; }        
         public ICollection<AnswerHistory> AnswerHistories { get; set; } = new HashSet<AnswerHistory>();
     }
 
