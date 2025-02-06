@@ -1,6 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-namespace Data.Models
+using Data.Models;
+
+namespace Data.Configurations
 {
     public class SessionConfiguration : IEntityTypeConfiguration<Session>
     {

@@ -1,8 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.ComponentModel.DataAnnotations;
-namespace Data.Models
+using Data.Models;
+
+namespace Data.Configurations
 {
     public class AnswerHistoryConfiguration : IEntityTypeConfiguration<AnswerHistory>
     {
@@ -23,13 +23,13 @@ namespace Data.Models
             builder.HasOne(ah => ah.Question)
                    .WithMany() // Множество записей могут быть на этот вопрос
                    .HasForeignKey(ah => ah.QuestionId)
-                   .OnDelete(DeleteBehavior.SetNull); // Устанавливаем NULL при удалении Question
+                   .OnDelete(DeleteBehavior.Cascade); // Каскадное удаление для Question
 
             // Ответ имеет истории ответов игроков
             builder.HasOne(ah => ah.Answer)
                    .WithMany() // Множество записей могут быть на ответ
                    .HasForeignKey(ah => ah.AnswerId)
-                   .OnDelete(DeleteBehavior.SetNull); // Устанавливаем NULL при удалении Answer
+                   .OnDelete(DeleteBehavior.Cascade); // Каскадное удаление для Answer
 
             // Один Session содержит много ответов
             builder.HasOne(ah => ah.GameSession)

@@ -1,28 +1,28 @@
-﻿using Data.Configurations;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
+using Data.Models;
+using Data.Configurations;
+using Microsoft.Extensions.Configuration;
 
-namespace Data.Models
+namespace Data
 {
     public class AppDbContext : DbContext
     {
-        const string _connString = "Server=localhost;user=root;password=Omega42;database=testMQQuizGame";
+        //const string _connString = "Server=localhost;user=root;password=Omega42;database=testMQQuizGame";
+        string _connectionString = string.Empty;
         public DbSet<User> Users { get; set; } = null!;
         public DbSet<Session> Sessions { get; set; } = null!;
         public DbSet<Player> Players { get; set; } = null!;
         public DbSet<Question> Questions { get; set; } = null!;
         public DbSet<Answer> Answers { get; set; } = null!;
         public DbSet<AnswerHistory> AnswerHistories { get; set; } = null!;
-        public AppDbContext()
-        {
-            Database.EnsureCreated();
-        }
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            optionsBuilder.UseMySql(_connString, new MySqlServerVersion(new Version(5, 7, 22, 0)));
-        }
+        public AppDbContext(DbContextOptions<AppDbContext> options)
+        : base(options) { }             
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.ApplyConfiguration(new AnswerHistoryConfiguration());            
+            base.OnModelCreating(modelBuilder);
+            modelBuilder.ApplyConfigurationsFromAssembly(typeof(AppDbContext).Assembly);
+            modelBuilder.ApplyConfiguration(new AnswerConfiguration());            
+            modelBuilder.ApplyConfiguration(new SessionConfiguration());            
             modelBuilder.ApplyConfiguration(new AnswerHistoryConfiguration());            
         }
     }

@@ -1,7 +1,17 @@
+using Data;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+// Читаем строку подключения из appsettings.json
+var connectionString = builder.Configuration.GetConnectionString("MySQLConnection");
+
+// Регистрируем AppDbContext
+builder.Services.AddDbContext<AppDbContext>(options =>
+    options.UseMySql(connectionString, new MySqlServerVersion(new Version(5, 7, 22, 0))));
 
 var app = builder.Build();
 
