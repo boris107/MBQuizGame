@@ -152,12 +152,6 @@ namespace Data.Migrations
                         principalColumn: "AnswerId",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_AnswerHistories_Players_PlayerId",
-                        column: x => x.PlayerId,
-                        principalTable: "Players",
-                        principalColumn: "PlayerId",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
                         name: "FK_AnswerHistories_Questions_QuestionId",
                         column: x => x.QuestionId,
                         principalTable: "Questions",
@@ -178,14 +172,9 @@ namespace Data.Migrations
                 column: "AnswerId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_AnswerHistories_PlayerId_QuestionId_AnswerId_SessionId",
+                name: "IX_AnswerHistories_QuestionId_AnswerId_SessionId",
                 table: "AnswerHistories",
-                columns: new[] { "PlayerId", "QuestionId", "AnswerId", "SessionId" });
-
-            migrationBuilder.CreateIndex(
-                name: "IX_AnswerHistories_QuestionId",
-                table: "AnswerHistories",
-                column: "QuestionId");
+                columns: new[] { "QuestionId", "AnswerId", "SessionId" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AnswerHistories_SessionId",
@@ -221,16 +210,16 @@ namespace Data.Migrations
                 name: "AnswerHistories");
 
             migrationBuilder.DropTable(
-                name: "Answers");
-
-            migrationBuilder.DropTable(
                 name: "Players");
 
             migrationBuilder.DropTable(
-                name: "Questions");
+                name: "Answers");
 
             migrationBuilder.DropTable(
                 name: "Users");
+
+            migrationBuilder.DropTable(
+                name: "Questions");
 
             migrationBuilder.DropTable(
                 name: "Sessions");

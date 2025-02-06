@@ -13,7 +13,6 @@ namespace Data.Models
         public int AnswerId { get; set; }
         public DateTime DateTimeAnswered { get; set; }
         public Session GameSession { get; set; }
-        public Player Player { get; set; }
         public Question Question { get; set; }
         public Answer Answer { get; set; }
 

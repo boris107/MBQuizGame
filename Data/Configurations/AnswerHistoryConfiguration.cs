@@ -13,12 +13,6 @@ namespace Data.Configurations
                    .HasDefaultValueSql("NOW()")
                    .HasPrecision(0);
 
-            // Один игрок создает историю ответа
-            builder.HasOne(ah => ah.Player)
-                   .WithMany() // Игрок может создать множетсво историй
-                   .HasForeignKey(ah => ah.PlayerId)
-                   .OnDelete(DeleteBehavior.Cascade); // Каскадное удаление для Player
-
             // Вопрос имеет истории ответов игроков
             builder.HasOne(ah => ah.Question)
                    .WithMany() // Множество записей могут быть на этот вопрос
@@ -38,7 +32,7 @@ namespace Data.Configurations
                    .OnDelete(DeleteBehavior.Cascade); // Каскадное удаление для Session
 
             // Устанавливаем индекс для улучшения производительности запросов
-            builder.HasIndex(ah => new { ah.PlayerId, ah.QuestionId, ah.AnswerId, ah.SessionId });
+            builder.HasIndex(ah => new { ah.QuestionId, ah.AnswerId, ah.SessionId });
 
         }
     }

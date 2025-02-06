@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Data.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20250206194452_InitialCreate")]
+    [Migration("20250206195808_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -78,11 +78,9 @@ namespace Data.Migrations
 
                     b.HasIndex("AnswerId");
 
-                    b.HasIndex("QuestionId");
-
                     b.HasIndex("SessionId");
 
-                    b.HasIndex("PlayerId", "QuestionId", "AnswerId", "SessionId");
+                    b.HasIndex("QuestionId", "AnswerId", "SessionId");
 
                     b.ToTable("AnswerHistories");
                 });
@@ -229,12 +227,6 @@ namespace Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Data.Models.Player", "Player")
-                        .WithMany()
-                        .HasForeignKey("PlayerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("Data.Models.Question", "Question")
                         .WithMany()
                         .HasForeignKey("QuestionId")
@@ -250,8 +242,6 @@ namespace Data.Migrations
                     b.Navigation("Answer");
 
                     b.Navigation("GameSession");
-
-                    b.Navigation("Player");
 
                     b.Navigation("Question");
                 });
