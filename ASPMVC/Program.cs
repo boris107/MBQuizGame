@@ -1,5 +1,6 @@
 using Data;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,6 +13,10 @@ var connectionString = builder.Configuration.GetConnectionString("MySQLConnectio
 // Регистрируем AppDbContext
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseMySql(connectionString, new MySqlServerVersion(new Version(5, 7, 22, 0))));
+
+builder.Services.AddAuthentication("Bearer")  // добавление сервисов аутентификации
+    .AddJwtBearer();                          // подключение аутентификации с помощью jwt-токенов
+builder.Services.AddAuthorization();          // добавление сервисов авторизации
 
 var app = builder.Build();
 
