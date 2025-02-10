@@ -18,6 +18,9 @@ namespace Data.Configurations
                    .HasForeignKey(a => a.QuestionId)
                    .IsRequired()
                    .OnDelete(DeleteBehavior.Cascade);
+
+            // Устанавливаем индекс для улучшения производительности запросов
+            builder.HasIndex(ah => new { ah.QuestionId});
         }
     }
 }

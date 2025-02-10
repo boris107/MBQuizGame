@@ -7,8 +7,6 @@ namespace Data
 {
     public class AppDbContext : DbContext
     {
-        //const string _connString = "Server=localhost;user=root;password=Omega42;database=testMQQuizGame";
-        string _connectionString = string.Empty;
         public DbSet<User> Users { get; set; } = null!;
         public DbSet<Session> Sessions { get; set; } = null!;
         public DbSet<Player> Players { get; set; } = null!;
