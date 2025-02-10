@@ -11,11 +11,8 @@ namespace Data.Models
         public int PlayerId { get; set; }
         public int QuestionId { get; set; }
         public int AnswerId { get; set; }
-        public DateTime DateTimeAnswered { get; set; } = DateTime.Now;
-        [Required]
-        [ForeignKey(nameof(SessionId))]
+        public DateTime DateTimeAnswered { get; set; }
         public Session GameSession { get; set; }
-        public Player? Player { get; set; }
         public Question Question { get; set; }
         public Answer Answer { get; set; }
 
